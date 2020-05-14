@@ -34,11 +34,23 @@ Horovod is an open source distributed training framework which supports TensorFl
         callbacks.append(tf.keras.callbacks.ModelCheckpoint('./checkpoint.h5', save_best_only=True, save_weights_only=False))
   ```
 ### Run Horovod
-**(To be complete 1)**
+- To run on a machine with 4 GPUs:
+    ```
+    $ horovodrun -np 4 -H localhost:4 python train.py
+    ```
+- To run on 4 machines with 4 GPUs each:
+    ```
+    $ horovodrun -np 16 -H server1:4,server2:4,server3:4,server4:4 python train.py
+    ```
+**Note:** The host where horovodrun is executed must be able to SSH to all other hosts without any prompts. Make sure you can ssh to every other server without entering a password. To send your public key, you can executed following command:
+```
+$ cat ~/.ssh/id_rsa.pub | ssh server@xxx.xxx.xxx.xxx 'cat >> .ssh/authorized_keys‘
+```
+
 ## Setup
 The following steps demonstrated how to setup a working environment for multi-GPU training with Horovod.
 ### Prerequisite
 - Hardware: A machine with at least two GPUs or using Qemu virtual machine for toy experiment.
 - Software: Open MPI, Horovod, DL framwork (TensorFlow, Keras, PyTorch or MXNet)
 ### Installation
-**(To be complete 2)**
+**(To be complete)**
