@@ -33,14 +33,26 @@ Horovod is an open source distributed training framework which supports TensorFl
   if hvd.rank() == 0:
         callbacks.append(tf.keras.callbacks.ModelCheckpoint('./checkpoint.h5', save_best_only=True, save_weights_only=False))
   ```
+## Usage
+### Dataset
+The following dataset is a subset (contains 3,000 images) of the full dataset to decrease training time for practice purposes. The subset images are excerpted from the "Dogs vs. Cats" dataset available on Kaggle, which contains 25,000 images. You can download the original dataset at: https://www.kaggle.com/c/dogs-vs-cats/data
+
+Download the cats and dogs dataset and make sure extracting it in this repo folder:
+```
+$ wget https://storage.googleapis.com/mledu-datasets/cats_and_dogs_filtered.zip
+$ unzip cats_and_dogs_filtered.zip
+$ mv cats_and_dogs_filtered/ cats_and_dogs_small/
+```
+
 ### Run Horovod
+The following command demonstrated a example of training cats and dogs classification with with Horovod command.
 - To run on a machine with 4 GPUs:
     ```
-    $ horovodrun -np 4 -H localhost:4 python train.py
+    $ horovodrun -np 4 -H localhost:4 python horovod_cat_dog.py
     ```
 - To run on 4 machines with 4 GPUs each:
     ```
-    $ horovodrun -np 16 -H server1:4,server2:4,server3:4,server4:4 python train.py
+    $ horovodrun -np 16 -H server1:4,server2:4,server3:4,server4:4 python horovod_cat_dog.py
     ```
 **Note:** The host where horovodrun is executed must be able to SSH to all other hosts without any prompts. Make sure you can ssh to every other server without entering a password. To send your public key, you can executed following command:
 ```
